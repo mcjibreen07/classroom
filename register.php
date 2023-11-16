@@ -74,6 +74,11 @@ require 'includes/form_handlers/login_handler.php';
                 </form>
 
             </div>
+            <div id="first">
+               
+            <button   class="btn btn-secondary submit-btn" onclick="btn_click()" style="width: 100%;font-weight:bold;background-color: #59ad5d; color: #fff; padding: 8px 12px; border: none; border-radius: 4px; cursor: pointer;"> Smart NoteBook</button>
+
+            </div>
 
 
             <div id="second">
@@ -152,7 +157,18 @@ require 'includes/form_handlers/login_handler.php';
             });
 
         });
- 
+var destinationURL = "/Enhanced/note-taking-app/";
+   
+
+// Redirect to the specified URL
+      function btn_click(){
+     window.location.href = destinationURL;    
+
+    <?php
+       
+    ?>
+
+      }
     </script>
 </body>
 

@@ -125,6 +125,9 @@ if(isset($_POST['search__btn'])){
                 <input type="text" placeholder='Search posts' autocomplete='off'  id='search-bar' name='searched_text'><button id="search__btn" name="search__btn"><i class="fas fa-search"></i></button>
         </form> 
         <div class="assignment_box">
+            
+            <a href="#" id="note"><i class="fas fa-book"  style='margin-right: 5px;'></i>Take Note </a>
+
             <a href="#" id="postBtn"><i class="fab fa-megaport" style='margin-right: 5px;'></i>Post</a>
             
             <a href="#" id="assignmentBtn"><i class="far fa-file-word" style='margin-right: 5px;'></i>Assignment Section</a>
@@ -141,6 +144,8 @@ if(isset($_POST['search__btn'])){
         </div>
     </div>
 
+   
+
     <div id="modal2">
         <div id="modal_bg"></div>
         <div id="edit_box">
@@ -152,6 +157,7 @@ if(isset($_POST['search__btn'])){
         </div>
     </div>
 
+   
     <div class="people_column">
        <h4>Instructor:</h4><a href="<?php echo $teacherName; ?>"><img src='<?php echo $teacherDetails['profilePic'] ?>' width='40'><?php echo $teacherDetails['first_name'] . " " . $teacherDetails['last_name'] ?></a>
         <br>
@@ -186,7 +192,8 @@ if(isset($_POST['search__btn'])){
             <form class="assignment_form" method="POST" enctype="multipart/form-data">
                 <input type="file" name="file" id="fileToUpload">
                 <textarea name='assignment_text' id='assignment-textarea' placeholder='Type here'></textarea>
-                <a href='classRoom.php?classCode=$courseCode'><input type='submit' name='upload' id='assignment-upload-button' value='Upload'></a>
+             <a href='classRoom.php?classCode=$courseCode'><input type='submit' name='upload' id='assignment-upload-button' value='Upload'></a>
+                
                 <hr>
             </form>
             <?php
@@ -194,17 +201,81 @@ if(isset($_POST['search__btn'])){
             $post->loadFiles();
             ?>
         </div>
-          
-         
+
+        <div id="third" style="display: none;">
+        <h3>Mini Note Book for:  <?php echo $classCode ?></h3>
+
+
+        <div class="main-panel mt-4 ml-5 col-11">
+        <div class="row">
+
+            <!-- Add Note -->
+            <div class="col-md-4 border-right"  >
+                <div class="card">
+                    <div class="card-body">
+                 
+<form action="endpoint/add_note.php" method="POST" name="Noteform">
+<div class="note-container"style="width: 300px; margin-left: 0; padding: 15px; border: 1px solid #ccc; border-radius: 8px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);">
+    <div>
+        <input type="text" class="form-control" id="noteTitle" name="note_title" placeholder="Title" style="width: 100%;
+            margin-bottom: 10px">
+    </div>
+    <div>
+        <input type="hidden" name="classCode" value="<?php echo $classCode; ?>" />
+        <textarea class="form-control note-textarea" id="note" name="note_content" rows="8" style="width: 100%; margin-bottom: 10px;"></textarea>
+    </div>
+    <div>
+        <button type="submit" class="btn btn-secondary submit-btn" style="width: 100%; background-color: #007bff; color: #fff; padding: 8px 12px; border: none; border-radius: 4px; cursor: pointer;">Submit</button>
+    </div>
+</div>
+</form>
+
+
+
+
+                    </div>
+                </div>
+            </div>
+            
+
+            
+        </div>
     </div>
 
 
-</div>
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        </div>
+
+        </div>
+
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 
 <script>
+
+ 
+
+ 
+
+
     var expandBtn = document.getElementById('code_expand');
     var modal = document.getElementById("modal");
+    
     var closeBtn = document.getElementById("close_btn");
 
     expandBtn.addEventListener('click', openModal);
@@ -258,20 +329,33 @@ if(isset($_POST['search__btn'])){
 
     //on click signup, hide login and show registration form
     $(document).ready(function() {
+      
 
+        
         $("#assignmentBtn").click(function() { //show assignment form and hide post form 
             $("#first").slideUp("slow", function() {
                 $("#second").slideDown("slow");
+               
             });
         });
 
         $("#postBtn").click(function() {
             $("#second").slideUp("slow", function() { //vice versa
                 $("#first").slideDown("slow");
+                $("#second").hide();
+                $("#third").hide();
+
             });
         });
     });
-    
+
+     $("#note").click(function() {
+        // Toggle the visibility of the third div
+        $("#third").slideToggle("slow");
+        $("#first").hide();
+        $("#second").hide();
+     
+    });
     
 </script>
 </body>

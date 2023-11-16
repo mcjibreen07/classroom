@@ -19,20 +19,20 @@ class User {
 		return $this->user['username'];
 	}
 
-	// public function getNumPosts() {
-	// 	$username = $this->user['username'];
-	// 	$query = mysqli_query($this->con, "SELECT num_posts FROM users WHERE username='$username'");
-	// 	$row = mysqli_fetch_array($query);
-	// 	return $row['num_posts'];
-	// }
-
+	/* public function getNumPosts() {
+	 	$username = $this->user['username'];
+	 	$query = mysqli_query($this->con, "SELECT num_posts FROM users WHERE username='$username'");
+	 	$row = mysqli_fetch_array($query);
+	 	return $row['num_posts'];
+	 }
+*/
 	public function getFirstAndLastName() {
 		$username = $this->user['username'];
+		
 		$query = mysqli_query($this->con, "SELECT first_name, last_name FROM users WHERE username='$username'");
 		$row = mysqli_fetch_array($query);
 		return $row['first_name'] . " " . $row['last_name'];
 	}
-	
 	public function isClosed() {
 		$username = $this->user['username'];
 		$query = mysqli_query($this->con, "SELECT user_closed FROM users WHERE username='$username'");
@@ -103,10 +103,11 @@ class User {
 	public function isStudent($username_to_check) {
 		$usernameComma = "," . $username_to_check . ",";
 
-		if(strstr($this->user2['student_array'], $usernameComma) || $username_to_check == $this->user2['username']) {
-			return true;
-		}
-		elseif(strstr($this->code['student_array'], $usernameComma)){
+	//	if(strstr($this->user2['student_array'], $usernameComma) || $username_to_check == $this->user2['username']) {
+	//		return true;
+	//	}
+		//else
+		if(strstr($this->code['student_array'], $usernameComma)){
             return true;
 		}
 		else {
